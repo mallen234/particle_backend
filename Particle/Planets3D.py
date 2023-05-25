@@ -1,8 +1,7 @@
 import math
 import numpy as np
 import sys
-from Particle3D import Particle3D
-import Functions as fun
+from Particle.Particle3D import Particle3D
 # import backend.Functions as fun
 import json
 
@@ -18,11 +17,10 @@ def update_positions(planetlist, F, dt, numstep, N):
         existing_data = json.load(file)
 
     for i in range(numstep):
-        print(i)
         for j in range(len(planetlist)):
             planetlist[j].leap_pos2nd(dt, F[j, :])
 
-        force_new = fun.R_Force(planetlist, N)
+        force_new = Particle3D.R_Force(planetlist, N)
 
         for k in range(len(planetlist)):
             A = 0.5 * (F[k, :] + force_new[k, :])
